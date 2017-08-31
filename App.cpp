@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+#include "LedMatrix.h"
 #include "App.h"
 
 extern int latchPin = 8;
@@ -13,6 +14,7 @@ extern int lc_74138 = 5;
 extern int ld_74138 = 6;
 
 App::App()
+    : ledMatrix(new LedMatrix(LED_R_PIN, LED_G_PIN, LED_B_Pin))
 {
 }
 
