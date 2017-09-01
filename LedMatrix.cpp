@@ -4,9 +4,24 @@
 
 extern char *message;
 
-LedMatrix::LedMatrix(int latchPin, int clockPin)
+LedMatrix::LedMatrix(int latchPin,
+                     int clockPin,
+                     int data_R1,
+                     int data_R2,
+                     int en_74138,
+                     int la_74138,
+                     int lb_74138,
+                     int lc_74138,
+                     int ld_74138)
     : latchPin(latchPin),
       clockPin(clockPin),
+      data_R1(data_R1),
+      data_R2(data_R2),
+      en_74138(en_74138),
+      la_74138(la_74138),
+      lb_74138(lb_74138),
+      lc_74138(lc_74138),
+      ld_74138(ld_74138),
       displayMatrix({
           // Display buffer (which is scanned by the interrupt timer) of 8x32 bytes
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
