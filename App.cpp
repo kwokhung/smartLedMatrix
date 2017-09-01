@@ -14,7 +14,11 @@ App::App()
                               LEDMATRIX_LA_74138_PIN,
                               LEDMATRIX_LB_74138_PIN,
                               LEDMATRIX_LC_74138_PIN,
-                              LEDMATRIX_LD_74138_PIN))
+                              LEDMATRIX_LD_74138_PIN,
+                              LEDMATRIX_ROWSIZE,
+                              LEDMATRIX_COLUMNSIZE,
+                              LEDMATRIX_FONTTABLE_ROWSIZE,
+                              LEDMATRIX_DISPLAYPANEL_ROWSIZE))
 {
 }
 

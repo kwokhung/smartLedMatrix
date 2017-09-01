@@ -11,6 +11,11 @@
 #define LEDMATRIX_LC_74138_PIN 5
 #define LEDMATRIX_LD_74138_PIN 6
 
+#define LEDMATRIX_ROWSIZE 32
+#define LEDMATRIX_COLUMNSIZE 8
+#define LEDMATRIX_FONTTABLE_ROWSIZE 16
+#define LEDMATRIX_DISPLAYPANEL_ROWSIZE 16
+
 #include "LedMatrix.h"
 
 class App
@@ -20,9 +25,9 @@ public:
 
   void setup();
   LedMatrix *getLedMatrix();
-  
+
 private:
-    LedMatrix *ledMatrix;
+  LedMatrix *ledMatrix;
 };
 
 #endif
