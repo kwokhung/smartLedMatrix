@@ -4,15 +4,15 @@
 class LedMatrix
 {
 public:
-  LedMatrix(int IC74595LatchPin,
-            int IC74595ClockPin,
-            int IC74595DataR1Pin,
-            int IC74595DataR2Pin,
-            int en_74138,
-            int la_74138,
-            int lb_74138,
-            int lc_74138,
-            int ld_74138,
+  LedMatrix(int ic74595LatchPin,
+            int ic74595ClockPin,
+            int ic74595DataR1Pin,
+            int ic74595DataR2Pin,
+            int ic74138EnPin,
+            int ic74138LaPin,
+            int ic74138LbPin,
+            int ic74138LcPin,
+            int ic74138LdPin,
             int displayMatrixRowSize,
             int displayMatrixColumnSize,
             int fontTableRowSize,
@@ -27,15 +27,15 @@ public:
   void loop();
 
 private:
-  int IC74595LatchPin;
-  int IC74595ClockPin;
-  int IC74595DataR1Pin;
-  int IC74595DataR2Pin;
-  int en_74138;
-  int la_74138;
-  int lb_74138;
-  int lc_74138;
-  int ld_74138;
+  int ic74595LatchPin;
+  int ic74595ClockPin;
+  int ic74595DataR1Pin;
+  int ic74595DataR2Pin;
+  int ic74138EnPin;
+  int ic74138LaPin;
+  int ic74138LbPin;
+  int ic74138LcPin;
+  int ic74138LdPin;
   int displayMatrixRowSize;
   int displayMatrixColumnSize;
   int fontTableRowSize;

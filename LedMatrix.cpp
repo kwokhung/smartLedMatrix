@@ -2,29 +2,29 @@
 
 #include "LedMatrix.h"
 
-LedMatrix::LedMatrix(int IC74595LatchPin,
-                     int IC74595ClockPin,
-                     int IC74595DataR1Pin,
-                     int IC74595DataR2Pin,
-                     int en_74138,
-                     int la_74138,
-                     int lb_74138,
-                     int lc_74138,
-                     int ld_74138,
+LedMatrix::LedMatrix(int ic74595LatchPin,
+                     int ic74595ClockPin,
+                     int ic74595DataR1Pin,
+                     int ic74595DataR2Pin,
+                     int ic74138EnPin,
+                     int ic74138LaPin,
+                     int ic74138LbPin,
+                     int ic74138LcPin,
+                     int ic74138LdPin,
                      int displayMatrixRowSize,
                      int displayMatrixColumnSize,
                      int fontTableRowSize,
                      int displayPanelRowSize,
                      char *message)
-    : IC74595LatchPin(IC74595LatchPin),
-      IC74595ClockPin(IC74595ClockPin),
-      IC74595DataR1Pin(IC74595DataR1Pin),
-      IC74595DataR2Pin(IC74595DataR2Pin),
-      en_74138(en_74138),
-      la_74138(la_74138),
-      lb_74138(lb_74138),
-      lc_74138(lc_74138),
-      ld_74138(ld_74138),
+    : ic74595LatchPin(ic74595LatchPin),
+      ic74595ClockPin(ic74595ClockPin),
+      ic74595DataR1Pin(ic74595DataR1Pin),
+      ic74595DataR2Pin(ic74595DataR2Pin),
+      ic74138EnPin(ic74138EnPin),
+      ic74138LaPin(ic74138LaPin),
+      ic74138LbPin(ic74138LbPin),
+      ic74138LcPin(ic74138LcPin),
+      ic74138LdPin(ic74138LdPin),
       displayMatrixRowSize(displayMatrixRowSize),
       displayMatrixColumnSize(displayMatrixColumnSize),
       fontTableRowSize(fontTableRowSize),
@@ -172,20 +172,20 @@ void LedMatrix::setup()
     // enable timer compare interrupt
     TIMSK2 |= (1 << OCIE2A);
 
-    pinMode(IC74595LatchPin, OUTPUT);
-    pinMode(IC74595ClockPin, OUTPUT);
-    pinMode(IC74595DataR1Pin, OUTPUT);
-    pinMode(IC74595DataR2Pin, OUTPUT);
+    pinMode(ic74595LatchPin, OUTPUT);
+    pinMode(ic74595ClockPin, OUTPUT);
+    pinMode(ic74595DataR1Pin, OUTPUT);
+    pinMode(ic74595DataR2Pin, OUTPUT);
 
-    pinMode(en_74138, OUTPUT);
-    pinMode(la_74138, OUTPUT);
-    pinMode(lb_74138, OUTPUT);
-    pinMode(lc_74138, OUTPUT);
-    pinMode(ld_74138, OUTPUT);
+    pinMode(ic74138EnPin, OUTPUT);
+    pinMode(ic74138LaPin, OUTPUT);
+    pinMode(ic74138LbPin, OUTPUT);
+    pinMode(ic74138LcPin, OUTPUT);
+    pinMode(ic74138LdPin, OUTPUT);
 
-    digitalWrite(en_74138, LOW);
-    digitalWrite(IC74595DataR1Pin, HIGH);
-    digitalWrite(IC74595DataR2Pin, HIGH);
+    digitalWrite(ic74138EnPin, LOW);
+    digitalWrite(ic74595DataR1Pin, HIGH);
+    digitalWrite(ic74595DataR2Pin, HIGH);
 
     sei();
 }
@@ -276,7 +276,7 @@ void LedMatrix::moveDisplayMatrixLeft(int noOfPixel, int startOfRow, int endOfRo
     }
 };
 
-// shift 8 columns of a row from buffer via IC74595DataR1Pin (first 16 rows) and IC74595DataR2Pin (second 16 rows)
+// shift 8 columns of a row from buffer via ic74595DataR1Pin (first 16 rows) and ic74595DataR2Pin (second 16 rows)
 void LedMatrix::shiftOut(int row)
 {
     for (int column = 0; column < 8; column++)
@@ -286,22 +286,22 @@ void LedMatrix::shiftOut(int row)
 
         for (int i = 0; i < 8; i++)
         {
-            // set IC74595DataR1Pin and IC74595DataR2Pin to LOW;
-            PORTB &= ~(3 << (IC74595DataR1Pin - 8));
+            // set ic74595DataR1Pin and ic74595DataR2Pin to LOW;
+            PORTB &= ~(3 << (ic74595DataR1Pin - 8));
 
-            // set IC74595ClockPin to LOW
-            PORTB &= ~(1 << (IC74595ClockPin - 8));
+            // set ic74595ClockPin to LOW
+            PORTB &= ~(1 << (ic74595ClockPin - 8));
 
             // top set of rows
-            // set IC74595DataR1Pin to high if displayMatrix[index] reverse i is low
-            PORTB |= !((displayMatrix[index] >> (7 - i)) & 0x01) << (IC74595DataR1Pin - 8);
+            // set ic74595DataR1Pin to high if displayMatrix[index] reverse i is low
+            PORTB |= !((displayMatrix[index] >> (7 - i)) & 0x01) << (ic74595DataR1Pin - 8);
 
             // bottom set of rows
-            // set IC74595DataR2Pin to high if displayMatrix[index + 128] reverse i is low
-            PORTB |= !((displayMatrix[index + 128] >> (7 - i)) & 0x01) << (IC74595DataR2Pin - 8);
+            // set ic74595DataR2Pin to high if displayMatrix[index + 128] reverse i is low
+            PORTB |= !((displayMatrix[index + 128] >> (7 - i)) & 0x01) << (ic74595DataR2Pin - 8);
 
-            // set IC74595ClockPin to HIGH
-            PORTB |= 1 << (IC74595ClockPin - 8);
+            // set ic74595ClockPin to HIGH
+            PORTB |= 1 << (ic74595ClockPin - 8);
         };
     };
 };
@@ -331,54 +331,54 @@ void LedMatrix::scan()
     cli();
 
     // Turn off display
-    digitalWrite(en_74138, HIGH);
+    digitalWrite(ic74138EnPin, HIGH);
 
     // Shift 8 columns for scanRow
     shiftOut(currentScanRow);
 
-    digitalWrite(IC74595LatchPin, LOW);
-    digitalWrite(IC74595LatchPin, HIGH);
+    digitalWrite(ic74595LatchPin, LOW);
+    digitalWrite(ic74595LatchPin, HIGH);
 
-    // Highlight row: pins 3 4 5 6 (la_74138 lb_74138 lc_74138 ld_74138)
+    // Highlight row: pins 3 4 5 6 (ic74138LaPin ic74138LbPin ic74138LcPin ic74138LdPin)
     //PORTD = (currentScanRow << 3) | (PORTD & 0b10000111);
     if (currentScanRow == 1 || currentScanRow == 3 || currentScanRow == 5 || currentScanRow == 7 || currentScanRow == 9 || currentScanRow == 11 || currentScanRow == 13 || currentScanRow == 15)
     {
-        digitalWrite(la_74138, HIGH);
+        digitalWrite(ic74138LaPin, HIGH);
     }
     else
     {
-        digitalWrite(la_74138, LOW);
+        digitalWrite(ic74138LaPin, LOW);
     }
 
     if (currentScanRow == 2 || currentScanRow == 3 || currentScanRow == 6 || currentScanRow == 7 || currentScanRow == 10 || currentScanRow == 11 || currentScanRow == 14 || currentScanRow == 15)
     {
-        digitalWrite(lb_74138, HIGH);
+        digitalWrite(ic74138LbPin, HIGH);
     }
     else
     {
-        digitalWrite(lb_74138, LOW);
+        digitalWrite(ic74138LbPin, LOW);
     }
 
     if (currentScanRow == 4 || currentScanRow == 5 || currentScanRow == 6 || currentScanRow == 7 || currentScanRow == 12 || currentScanRow == 13 || currentScanRow == 14 || currentScanRow == 15)
     {
-        digitalWrite(lc_74138, HIGH);
+        digitalWrite(ic74138LcPin, HIGH);
     }
     else
     {
-        digitalWrite(lc_74138, LOW);
+        digitalWrite(ic74138LcPin, LOW);
     }
 
     if (currentScanRow == 8 || currentScanRow == 9 || currentScanRow == 10 || currentScanRow == 11 || currentScanRow == 12 || currentScanRow == 13 || currentScanRow == 14 || currentScanRow == 15)
     {
-        digitalWrite(ld_74138, HIGH);
+        digitalWrite(ic74138LdPin, HIGH);
     }
     else
     {
-        digitalWrite(ld_74138, LOW);
+        digitalWrite(ic74138LdPin, LOW);
     }
 
     // Turn on display
-    digitalWrite(en_74138, LOW);
+    digitalWrite(ic74138EnPin, LOW);
 
     // Do the next pair of rows next time this routine is called
     currentScanRow++;
