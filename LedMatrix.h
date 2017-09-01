@@ -4,10 +4,10 @@
 class LedMatrix
 {
 public:
-  LedMatrix(int latchPin,
-            int clockPin,
-            int data_R1,
-            int data_R2,
+  LedMatrix(int IC74595LatchPin,
+            int IC74595ClockPin,
+            int IC74595DataR1Pin,
+            int IC74595DataR2Pin,
             int en_74138,
             int la_74138,
             int lb_74138,
@@ -27,10 +27,10 @@ public:
   void loop();
 
 private:
-  int latchPin;
-  int clockPin;
-  int data_R1;
-  int data_R2;
+  int IC74595LatchPin;
+  int IC74595ClockPin;
+  int IC74595DataR1Pin;
+  int IC74595DataR2Pin;
   int en_74138;
   int la_74138;
   int lb_74138;

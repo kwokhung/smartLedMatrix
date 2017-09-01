@@ -2,10 +2,10 @@
 
 #include "LedMatrix.h"
 
-LedMatrix::LedMatrix(int latchPin,
-                     int clockPin,
-                     int data_R1,
-                     int data_R2,
+LedMatrix::LedMatrix(int IC74595LatchPin,
+                     int IC74595ClockPin,
+                     int IC74595DataR1Pin,
+                     int IC74595DataR2Pin,
                      int en_74138,
                      int la_74138,
                      int lb_74138,
@@ -16,10 +16,10 @@ LedMatrix::LedMatrix(int latchPin,
                      int fontTableRowSize,
                      int displayPanelRowSize,
                      char *message)
-    : latchPin(latchPin),
-      clockPin(clockPin),
-      data_R1(data_R1),
-      data_R2(data_R2),
+    : IC74595LatchPin(IC74595LatchPin),
+      IC74595ClockPin(IC74595ClockPin),
+      IC74595DataR1Pin(IC74595DataR1Pin),
+      IC74595DataR2Pin(IC74595DataR2Pin),
       en_74138(en_74138),
       la_74138(la_74138),
       lb_74138(lb_74138),
@@ -172,10 +172,10 @@ void LedMatrix::setup()
     // enable timer compare interrupt
     TIMSK2 |= (1 << OCIE2A);
 
-    pinMode(latchPin, OUTPUT);
-    pinMode(clockPin, OUTPUT);
-    pinMode(data_R1, OUTPUT);
-    pinMode(data_R2, OUTPUT);
+    pinMode(IC74595LatchPin, OUTPUT);
+    pinMode(IC74595ClockPin, OUTPUT);
+    pinMode(IC74595DataR1Pin, OUTPUT);
+    pinMode(IC74595DataR2Pin, OUTPUT);
 
     pinMode(en_74138, OUTPUT);
     pinMode(la_74138, OUTPUT);
@@ -184,8 +184,8 @@ void LedMatrix::setup()
     pinMode(ld_74138, OUTPUT);
 
     digitalWrite(en_74138, LOW);
-    digitalWrite(data_R1, HIGH);
-    digitalWrite(data_R2, HIGH);
+    digitalWrite(IC74595DataR1Pin, HIGH);
+    digitalWrite(IC74595DataR2Pin, HIGH);
 
     sei();
 }
@@ -276,7 +276,7 @@ void LedMatrix::moveDisplayMatrixLeft(int noOfPixel, int startOfRow, int endOfRo
     }
 };
 
-// shift 8 columns of a row from buffer via data_R1 (first 16 rows) and data_R2 (second 16 rows)
+// shift 8 columns of a row from buffer via IC74595DataR1Pin (first 16 rows) and IC74595DataR2Pin (second 16 rows)
 void LedMatrix::shiftOut(int row)
 {
     for (int column = 0; column < 8; column++)
@@ -286,22 +286,22 @@ void LedMatrix::shiftOut(int row)
 
         for (int i = 0; i < 8; i++)
         {
-            // set data_R1 and data_R2 to LOW;
-            PORTB &= ~(3 << (data_R1 - 8));
+            // set IC74595DataR1Pin and IC74595DataR2Pin to LOW;
+            PORTB &= ~(3 << (IC74595DataR1Pin - 8));
 
-            // set clockPin to LOW
-            PORTB &= ~(1 << (clockPin - 8));
+            // set IC74595ClockPin to LOW
+            PORTB &= ~(1 << (IC74595ClockPin - 8));
 
             // top set of rows
-            // set data_R1 to high if displayMatrix[index] reverse i is low
-            PORTB |= !((displayMatrix[index] >> (7 - i)) & 0x01) << (data_R1 - 8);
+            // set IC74595DataR1Pin to high if displayMatrix[index] reverse i is low
+            PORTB |= !((displayMatrix[index] >> (7 - i)) & 0x01) << (IC74595DataR1Pin - 8);
 
             // bottom set of rows
-            // set data_R2 to high if displayMatrix[index + 128] reverse i is low
-            PORTB |= !((displayMatrix[index + 128] >> (7 - i)) & 0x01) << (data_R2 - 8);
+            // set IC74595DataR2Pin to high if displayMatrix[index + 128] reverse i is low
+            PORTB |= !((displayMatrix[index + 128] >> (7 - i)) & 0x01) << (IC74595DataR2Pin - 8);
 
-            // set clockPin to HIGH
-            PORTB |= 1 << (clockPin - 8);
+            // set IC74595ClockPin to HIGH
+            PORTB |= 1 << (IC74595ClockPin - 8);
         };
     };
 };
@@ -336,8 +336,8 @@ void LedMatrix::scan()
     // Shift 8 columns for scanRow
     shiftOut(currentScanRow);
 
-    digitalWrite(latchPin, LOW);
-    digitalWrite(latchPin, HIGH);
+    digitalWrite(IC74595LatchPin, LOW);
+    digitalWrite(IC74595LatchPin, HIGH);
 
     // Highlight row: pins 3 4 5 6 (la_74138 lb_74138 lc_74138 ld_74138)
     //PORTD = (currentScanRow << 3) | (PORTD & 0b10000111);
