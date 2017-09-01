@@ -16,7 +16,8 @@ public:
             int displayMatrixRowSize,
             int displayMatrixColumnSize,
             int fontTableRowSize,
-            int displayPanelRowSize);
+            int displayPanelRowSize,
+            char *message);
 
   void setup();
   void putCharToDisplayMatrix(uint16_t column, uint16_t row, byte character, boolean inverse);
@@ -39,6 +40,7 @@ private:
   int displayMatrixColumnSize;
   int fontTableRowSize;
   int displayPanelRowSize;
+  char *message;
   byte displayMatrix[256];
   uint8_t fontTable[1536];
   int currentScanRow;

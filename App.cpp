@@ -3,8 +3,6 @@
 #include "LedMatrix.h"
 #include "App.h"
 
-const char *message = "Date & Time: 2016/06/21 13:37:21   ";
-
 App::App()
     : ledMatrix(new LedMatrix(LEDMATRIX_LATCH_PIN,
                               LEDMATRIX_CLOCK_PIN,
@@ -18,7 +16,8 @@ App::App()
                               LEDMATRIX_ROWSIZE,
                               LEDMATRIX_COLUMNSIZE,
                               LEDMATRIX_FONTTABLE_ROWSIZE,
-                              LEDMATRIX_DISPLAYPANEL_ROWSIZE))
+                              LEDMATRIX_DISPLAYPANEL_ROWSIZE,
+                              LEDMATRIX_MESSAGE))
 {
 }
 

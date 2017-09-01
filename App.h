@@ -16,6 +16,8 @@
 #define LEDMATRIX_FONTTABLE_ROWSIZE 16
 #define LEDMATRIX_DISPLAYPANEL_ROWSIZE 16
 
+#define LEDMATRIX_MESSAGE "Date & Time: 2016/06/21 13:37:21   "
+
 #include "LedMatrix.h"
 
 class App

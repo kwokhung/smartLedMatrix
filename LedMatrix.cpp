@@ -16,7 +16,8 @@ LedMatrix::LedMatrix(int latchPin,
                      int displayMatrixRowSize,
                      int displayMatrixColumnSize,
                      int fontTableRowSize,
-                     int displayPanelRowSize)
+                     int displayPanelRowSize,
+                     char *message)
     : latchPin(latchPin),
       clockPin(clockPin),
       data_R1(data_R1),
@@ -30,6 +31,7 @@ LedMatrix::LedMatrix(int latchPin,
       displayMatrixColumnSize(displayMatrixColumnSize),
       fontTableRowSize(fontTableRowSize),
       displayPanelRowSize(displayPanelRowSize),
+      message(message),
       displayMatrix({
           // Display buffer (which is scanned by the interrupt timer) of 8x32 bytes
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
