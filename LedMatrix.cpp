@@ -2,8 +2,6 @@
 
 #include "LedMatrix.h"
 
-extern char *message;
-
 LedMatrix::LedMatrix(int latchPin,
                      int clockPin,
                      int data_R1,
@@ -309,6 +307,20 @@ void LedMatrix::shiftOut(int row)
     };
 };
 
+void LedMatrix::loop()
+{
+    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */, 0 /* first 16 rows */, message[messageIndex % (strlen(message) - 1)], false);
+    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */, displayMatrixRowSize / 2 /* second 16 rows */, message[messageIndex % (strlen(message) - 1)], false);
+    messageIndex++;
+
+    for (int i = 0; i < 8; i++)
+    {
+        delay(640);
+
+        moveDisplayMatrixLeft(1, 1, displayMatrixRowSize);
+    };
+}
+
 void LedMatrix::scan()
 {
     cli();
@@ -371,17 +383,3 @@ void LedMatrix::scan()
 
     sei();
 };
-
-void LedMatrix::loop()
-{
-    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */, 0 /* first 16 rows */, message[messageIndex % (strlen(message) - 1)], false);
-    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */, displayMatrixRowSize / 2 /* second 16 rows */, message[messageIndex % (strlen(message) - 1)], false);
-    messageIndex++;
-
-    for (int i = 0; i < 8; i++)
-    {
-        delay(640);
-
-        moveDisplayMatrixLeft(1, 1, displayMatrixRowSize);
-    };
-}
