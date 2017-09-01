@@ -154,7 +154,6 @@ LedMatrix::LedMatrix(int latchPin,
 void LedMatrix::setup()
 {
     // Set up Timer2 as the scanning interrupt timer
-
     cli();
 
     TCCR2A = 0;
@@ -309,8 +308,14 @@ void LedMatrix::shiftOut(int row)
 
 void LedMatrix::loop()
 {
-    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */, 0 /* first 16 rows */, message[messageIndex % (strlen(message) - 1)], false);
-    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */, displayMatrixRowSize / 2 /* second 16 rows */, message[messageIndex % (strlen(message) - 1)], false);
+    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */,
+                           0 /* first 16 rows */,
+                           message[messageIndex % (strlen(message) - 1)],
+                           false);
+    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */,
+                           displayMatrixRowSize / 2 /* second 16 rows */,
+                           message[messageIndex % (strlen(message) - 1)],
+                           false);
     messageIndex++;
 
     for (int i = 0; i < 8; i++)
@@ -379,7 +384,9 @@ void LedMatrix::scan()
     currentScanRow++;
 
     if (currentScanRow == displayPanelRowSize)
+    {
         currentScanRow = 0;
+    }
 
     sei();
 };
