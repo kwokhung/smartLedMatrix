@@ -13,7 +13,8 @@ public:
   App();
 
   void setup();
-
+  LedMatrix *getLedMatrix();
+  
 private:
     LedMatrix *ledMatrix;
 };
