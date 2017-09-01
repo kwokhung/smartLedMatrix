@@ -1,8 +1,6 @@
 #ifndef LedMatrix_h
 #define LedMatrix_h
 
-#define latchPin 8
-#define clockPin 12
 #define data_R1 10
 #define data_R2 11
 #define en_74138 2
@@ -19,7 +17,7 @@
 class LedMatrix
 {
   public:
-    LedMatrix(int rPin, int gPin, int bPin);
+    LedMatrix(int latchPin, int clockPin);
     
     void setup();
     void putCharToDisplayMatrix(uint16_t column, uint16_t row, byte character, boolean inverse);
@@ -29,9 +27,8 @@ class LedMatrix
     void loop();
     
   private:
-    int rPin;
-    int gPin;
-    int bPin;
+    int latchPin;
+    int clockPin;
     byte displayMatrix[256];
     uint8_t fontTable[1536];
     int currentScanRow;
