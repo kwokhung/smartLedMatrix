@@ -11,8 +11,8 @@ LedMatrix::LedMatrix(int ic74595LatchPin,
                      int ic74138LbPin,
                      int ic74138LcPin,
                      int ic74138LdPin,
-                     int displayMatrixRowSize,
-                     int displayMatrixColumnSize,
+                     int rowSize,
+                     int columnSize,
                      int fontTableRowSize,
                      int displayPanelRowSize,
                      char *message)
@@ -25,8 +25,8 @@ LedMatrix::LedMatrix(int ic74595LatchPin,
       ic74138LbPin(ic74138LbPin),
       ic74138LcPin(ic74138LcPin),
       ic74138LdPin(ic74138LdPin),
-      displayMatrixRowSize(displayMatrixRowSize),
-      displayMatrixColumnSize(displayMatrixColumnSize),
+      rowSize(rowSize),
+      columnSize(columnSize),
       fontTableRowSize(fontTableRowSize),
       displayPanelRowSize(displayPanelRowSize),
       message(message),
@@ -308,12 +308,12 @@ void LedMatrix::shiftOut(int row)
 
 void LedMatrix::loop()
 {
-    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */,
+    putCharToDisplayMatrix(columnSize - 1 /* right most column */,
                            0 /* first 16 rows */,
                            message[messageIndex % (strlen(message) - 1)],
                            false);
-    putCharToDisplayMatrix(displayMatrixColumnSize - 1 /* right most column */,
-                           displayMatrixRowSize / 2 /* second 16 rows */,
+    putCharToDisplayMatrix(columnSize - 1 /* right most column */,
+                           rowSize / 2 /* second 16 rows */,
                            message[messageIndex % (strlen(message) - 1)],
                            false);
     messageIndex++;
@@ -322,7 +322,7 @@ void LedMatrix::loop()
     {
         delay(640);
 
-        moveDisplayMatrixLeft(1, 1, displayMatrixRowSize);
+        moveDisplayMatrixLeft(1, 1, rowSize);
     };
 }
 

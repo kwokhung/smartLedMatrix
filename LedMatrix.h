@@ -13,8 +13,8 @@ public:
             int ic74138LbPin,
             int ic74138LcPin,
             int ic74138LdPin,
-            int displayMatrixRowSize,
-            int displayMatrixColumnSize,
+            int rowSize,
+            int columnSize,
             int fontTableRowSize,
             int displayPanelRowSize,
             char *message);
@@ -36,8 +36,8 @@ private:
   int ic74138LbPin;
   int ic74138LcPin;
   int ic74138LdPin;
-  int displayMatrixRowSize;
-  int displayMatrixColumnSize;
+  int rowSize;
+  int columnSize;
   int fontTableRowSize;
   int displayPanelRowSize;
   char *message;
