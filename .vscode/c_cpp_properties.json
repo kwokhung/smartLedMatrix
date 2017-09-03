@@ -3,12 +3,19 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\Users\\brianchu\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.20\\cores\\arduino"
-            ],
+                "C:\\Users\\brianchu\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.20\\cores\\arduino",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+                "C:\\Users\\brianchu\\Documents\\Arduino\\libraries",
+                "C:\\Users\\chu_k_000\\Documents\\Arduino\\libraries",
+                "${workspaceRoot}"
+        ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
                     "C:\\Users\\brianchu\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.20\\cores\\arduino",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+                    "C:\\Users\\brianchu\\Documents\\Arduino\\libraries",
+                    "C:\\Users\\chu_k_000\\Documents\\Arduino\\libraries",
                     "${workspaceRoot}"
                 ]
             },
