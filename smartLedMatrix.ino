@@ -14,5 +14,5 @@ void loop()
 
 ISR(TIMER2_COMPA_vect)
 {
-    app.getLedMatrix()->scan();
+    LedMatrix::scan();
 };
