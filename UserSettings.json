@@ -1,0 +1,30 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.fontSize": 20,
+    "git.confirmSync": false,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "window.zoomLevel": -1,
+    "arduino.path": "C:\\Program Files (x86)\\Arduino",
+    "arduino.additionalUrls": "",
+    "arduino.autoUpdateIndexFiles": false,
+    "arduino.logLevel": "info",
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "typescript.check.tscVersion": false,
+    "git.enableSmartCommit": true,
+    "mssql.connections": [
+        {
+            "server": "172.21.73.33\\SQLEXPRESS",
+            "database": "GcapCMSClient",
+            "user": "gcapcms",
+            "password": "d12e13",
+            "authenticationType": "SqlLogin"
+        },
+        {
+            "server": "172.21.72.71",
+            "database": "GcapCMS",
+            "user": "sa",
+            "password": "12345678",
+            "authenticationType": "SqlLogin"
+        }
+    ]
+}
