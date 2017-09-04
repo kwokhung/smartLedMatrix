@@ -23,6 +23,8 @@ App::App()
 
 void App::setup()
 {
+    Serial.begin(SERIAL_RATE);
+
     ledMatrix->setup();
 }
 
