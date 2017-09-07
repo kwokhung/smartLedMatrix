@@ -49,7 +49,7 @@ void LedMatrix::setup()
 
     // 160Hz scan rate = 10 frames / second (16 pairs of rows)
     // 97 = (16,000,000 / (1024 * 160)) - 1
-    OCR2A = 108;
+    OCR2A = 109;
 
     // turn on CTC mode
     TCCR2A |= (1 << WGM21);
