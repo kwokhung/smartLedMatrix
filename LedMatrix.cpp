@@ -15,6 +15,7 @@ LedMatrix::LedMatrix(int ic74595LatchPin,
                      int columnSize,
                      int fontTableRowSize,
                      int displayPanelRowSize,
+                     int shiftDelay,
                      char *message)
     : message(message),
       messageIndex(0)
@@ -32,6 +33,7 @@ LedMatrix::LedMatrix(int ic74595LatchPin,
     LedMatrix::columnSize = columnSize;
     LedMatrix::fontTableRowSize = fontTableRowSize;
     LedMatrix::displayPanelRowSize = displayPanelRowSize;
+    LedMatrix::shiftDelay = shiftDelay;
     LedMatrix::currentScanRow = 0;
 }
 
@@ -133,7 +135,7 @@ void LedMatrix::putCharToDisplayMatrix(uint16_t column, uint16_t row, byte chara
 void LedMatrix::moveDisplayMatrixLeft(int noOfPixel, int startOfRow, int endOfRow)
 {
     // routine to move certain rows on the screen "pixels" pixels to the left
-    for (int column = 0; column < 8; column++)
+    for (int column = 0; column < columnSize; column++)
     {
         for (int row = startOfRow; row < endOfRow; row++)
         {
@@ -175,7 +177,7 @@ void LedMatrix::loop()
 
     for (int i = 0; i < 8; i++)
     {
-        delay(640);
+        delay(shiftDelay);
 
         moveDisplayMatrixLeft(1, 1, rowSize);
     };
@@ -183,7 +185,7 @@ void LedMatrix::loop()
 
 static void LedMatrix::shiftOut(int row)
 {
-    for (int column = 0; column < 8; column++)
+    for (int column = 0; column < columnSize; column++)
     {
         // index = row(0-31), column(0-8)
         int index = (row << 3) + column;
@@ -288,6 +290,7 @@ static int LedMatrix::rowSize;
 static int LedMatrix::columnSize;
 static int LedMatrix::fontTableRowSize;
 static int LedMatrix::displayPanelRowSize;
+static int LedMatrix::shiftDelay;
 static int LedMatrix::currentScanRow;
 static byte LedMatrix::displayMatrix[256] = {
     // Display buffer (which is scanned by the interrupt timer) of 8x32 bytes

@@ -17,6 +17,7 @@ App::App()
                               LEDMATRIX_COLUMNSIZE,
                               LEDMATRIX_FONTTABLE_ROWSIZE,
                               LEDMATRIX_DISPLAYPANEL_ROWSIZE,
+                              LEDMATRIX_SHIFT_DELAY,
                               LEDMATRIX_MESSAGE))
 {
 }

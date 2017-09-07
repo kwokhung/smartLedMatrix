@@ -17,6 +17,7 @@ public:
             int columnSize,
             int fontTableRowSize,
             int displayPanelRowSize,
+            int shiftDelay,
             char *message);
 
   void setup();
@@ -40,6 +41,7 @@ public:
   static int columnSize;
   static int fontTableRowSize;
   static int displayPanelRowSize;
+  static int shiftDelay;
   static byte displayMatrix[256];
   static const uint8_t fontTable[1536];
   static int currentScanRow;
