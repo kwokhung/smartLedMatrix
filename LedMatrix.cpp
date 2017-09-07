@@ -74,11 +74,6 @@ void LedMatrix::setup()
     digitalWrite(ic74595DataR2Pin, HIGH);
 
     sei();
-
-    for (int i = 0; i < 256; i++)
-    {
-        displayMatrix[i] = 0xFF;
-    };
 }
 
 // Routine to put a single character in one of 8 columns in buffer

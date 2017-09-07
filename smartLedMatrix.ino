@@ -6,6 +6,11 @@ void setup()
 {
     app.setup();
 
+    for (int i = 0; i < 256; i++)
+    {
+        LedMatrix::displayMatrix[i] = 0xFF;
+    };
+
     for (int i = 0; i < LedMatrix::columnSize; i++)
     {
         app.getLedMatrix()->putCharToDisplayMatrix(i,
