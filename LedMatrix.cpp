@@ -165,11 +165,11 @@ void LedMatrix::loop()
 {
     putCharToDisplayMatrix(columnSize - 1 /* right most column */,
                            0 /* first 16 rows */,
-                           message[messageIndex % (strlen(message) - 1)],
+                           message[messageIndex % strlen(message)],
                            false);
     putCharToDisplayMatrix(columnSize - 1 /* right most column */,
                            rowSize / 2 /* second 16 rows */,
-                           message[messageIndex % (strlen(message) - 1)],
+                           message[messageIndex % strlen(message)],
                            false);
     messageIndex++;
 
