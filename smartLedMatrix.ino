@@ -6,7 +6,7 @@ void setup()
 {
     app.setup();
 
-    for (int i = 0; i < 256; i++)
+    for (int i = 0; i < LedMatrix::columnSize * LedMatrix::rowSize; i++)
     {
         LedMatrix::displayMatrix[i] = 0xFF;
     };
