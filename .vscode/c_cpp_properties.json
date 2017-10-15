@@ -8,7 +8,7 @@
                 "C:\\Users\\brianchu\\Documents\\Arduino\\libraries",
                 "C:\\Users\\chu_k_000\\Documents\\Arduino\\libraries",
                 "${workspaceRoot}"
-        ],
+            ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
@@ -22,5 +22,5 @@
             "intelliSenseMode": "msvc-x64"
         }
     ],
-    "version": 2
+    "version": 3
 }
