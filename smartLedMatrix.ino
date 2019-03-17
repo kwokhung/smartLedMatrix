@@ -21,7 +21,7 @@ void setup()
 };
 
 void loop(){
-    //app.getLedMatrix()->loop();
+    app.getLedMatrix()->loop();
 };
 
 ISR(TIMER2_COMPA_vect)
